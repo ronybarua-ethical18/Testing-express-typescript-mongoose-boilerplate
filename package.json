@@ -24,6 +24,18 @@
     "swagger-ui-express": "^4.5.0",
     "validator": "^13.7.0"
   },
+  "scripts": {
+    "start": "tsc --build && nodemon dist/index.js",
+    "compile": "tsc --build",
+    "compile:watch": "tsc --build --watch",
+    "pre:dev": "cross-env NODE_ENV=development nodemon --experimental-modules --es-module-specifier-resolution=node dist/index.js",
+    "dev": "concurrently --kill-others \"yarn compile:watch\" \"yarn pre:dev\"",
+    "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest -i --colors --verbose --detectOpenHandles",
+    "test:ts": "cross-env NODE_OPTIONS=--experimental-vm-modules jest -i --colors --verbose --detectOpenHandles -- 'ts$'",
+    "test:js": "cross-env NODE_OPTIONS=--experimental-vm-modules jest -i --colors --verbose --detectOpenHandles -- 'js$'",
+    "test:watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest -i --watchAll",
+    "commit": "git add -A && cz"
+  },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.2",
     "@types/compression": "^1.7.2",
